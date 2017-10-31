@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      database: admin
+      host: localhost
+      username: admin
+      password: toor
+      port: 27017
+      repositories:
+        enabled: true
+crawler:
+  consumerKey: o9iSYIrjXiutbSpn3fC1wbQue
+  consumerSecret: X8zCnRQW3p0hTGC39J2ED2QI4ELvs9mOc1lyNDY0BEdMa0iCcR
+  accessToken: 3043604459-VtZ8FmEfJwKBGSA6C633O0eqlM6EEm3fGzavr3g
+  accessTokenSecret: FroVety3MocdNJf5SitUBR9tehU9BX5IwL2FUTGMZyjHN

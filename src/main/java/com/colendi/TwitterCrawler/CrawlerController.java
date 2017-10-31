@@ -1,9 +1,6 @@
 package com.colendi.TwitterCrawler;
 
-import com.colendi.TwitterCrawler.domain.FriendShip;
-import com.colendi.TwitterCrawler.repository.FriendShipRepository;
-import com.colendi.TwitterCrawler.service.FriendShipSaveService;
-import com.colendi.TwitterCrawler.service.FriendShipService;
+import com.colendi.TwitterCrawler.service.FriendShipCrudService;
 import com.colendi.TwitterCrawler.service.TweetService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,19 +18,20 @@ import java.util.List;
 public class CrawlerController {
 
     private final TweetService tweetService;
-    private final FriendShipSaveService friendShipSaveService;
+    private final FriendShipCrudService friendShipCrudService;
 
-    public CrawlerController(TweetService tweetService, FriendShipSaveService friendShipSaveService) {
+    public CrawlerController(TweetService tweetService, FriendShipCrudService friendShipCrudService) {
         this.tweetService = tweetService;
-        this.friendShipSaveService = friendShipSaveService;
+        this.friendShipCrudService = friendShipCrudService;
     }
 
     @GetMapping("{user}")
     public void saveUserAndMentionUserAndTweetIdByUser(@PathVariable String user) {
         List<Status> statuses = tweetService.getAllTweetsByUser(user);
+        friendShipCrudService.removeAll();
         for (Status status : statuses) {
             UserMentionEntity[] userMentionEntities = status.getUserMentionEntities();
-            friendShipSaveService.saveFriendShip(status,userMentionEntities);
+            friendShipCrudService.saveFriendShip(status,userMentionEntities);
         }
 
     }

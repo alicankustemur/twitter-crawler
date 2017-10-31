@@ -43,4 +43,9 @@ public class FriendShipServiceImpl implements FriendShipService {
             saveUserAndMentionUserAndTweetId(status,userMentionEntities);
         }
     }
+
+    @Override
+    public void removeAll() {
+        friendShipRepository.deleteAll();
+    }
 }
