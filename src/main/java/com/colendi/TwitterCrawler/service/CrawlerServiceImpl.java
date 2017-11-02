@@ -35,9 +35,5 @@ public class CrawlerServiceImpl implements CrawlerService {
         return createTwitter().getUserTimeline(user, page);
     }
 
-    @Override
-    public boolean isTweetSizeEqualUserAllTweetSize(List<Status> list, int size) {
-        return list.size() == size ? true : false;
-    }
 
 }

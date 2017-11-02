@@ -12,5 +12,4 @@ import java.util.List;
 public interface CrawlerService {
     public Twitter createTwitter();
     public List<Status> getTweetsByUserAndPageNumber(String user,int pageNumber) throws TwitterException;
-    public boolean isTweetSizeEqualUserAllTweetSize(List<Status> list,int size);
 }
