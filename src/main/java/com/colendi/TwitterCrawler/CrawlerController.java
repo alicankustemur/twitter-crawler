@@ -30,7 +30,7 @@ public class CrawlerController {
     }
 
     @GetMapping("{user}")
-    public Map saveUserAndMentionUserAndTweetIdByUser(@PathVariable String user) {
+    public Map saveFriendShipAndGetAllFriendShipScore(@PathVariable String user) {
         List<Status> statuses = tweetService.getAllTweetsByUser(user);
         friendShipCrudService.removeAll();
         for (Status status : statuses) {

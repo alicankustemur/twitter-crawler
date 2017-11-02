@@ -14,6 +14,7 @@ import java.util.List;
 public class TweetServiceImpl implements TweetService {
 
     private final CrawlerService crawlerService;
+    private List<Status> tweets;
 
     public TweetServiceImpl(CrawlerService crawlerService) {
         this.crawlerService = crawlerService;
@@ -22,26 +23,30 @@ public class TweetServiceImpl implements TweetService {
     @Override
     public List<Status> getAllTweetsByUser(String user) {
         int pageNumber = 1;
-        List<Status> tweets = new ArrayList();
+        tweets = new ArrayList();
         while (true) {
-            try {
-                int size = tweets.size();
-                List list = crawlerService.getTweetsByUserAndPageNumber(user,pageNumber++);
-                tweets.addAll(list);
-                if(this.isTweetSizeEqualUserAllTweetSize(tweets,size)){
-                    break;
-                }
-            }
-            catch(TwitterException e) {
-                e.printStackTrace();
+            int tweetSize = tweets.size();
+            addTweetsByUserAndPageNumberToList(user,pageNumber++);
+            if (this.isTweetSizeEqualUserAllTweetSize(tweets, tweetSize)) {
+                break;
             }
         }
 
         return tweets;
     }
 
-    public boolean isTweetSizeEqualUserAllTweetSize(List<Status> list, int size) {
-        return list.size() == size ? true : false;
+    public void addTweetsByUserAndPageNumberToList(String user, Integer pageNumber) {
+        try {
+            List list = crawlerService.getTweetsByUserAndPageNumber(user, pageNumber);
+            tweets.addAll(list);
+        } catch (TwitterException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public boolean isTweetSizeEqualUserAllTweetSize(List<Status> list, int tweetSize) {
+        return list.size() == tweetSize ? true : false;
     }
 
 }
