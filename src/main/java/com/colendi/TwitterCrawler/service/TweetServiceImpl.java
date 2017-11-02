@@ -40,16 +40,6 @@ public class TweetServiceImpl implements TweetService {
         return tweets;
     }
 
-    @Override
-    public Status getStatusById(Long id) {
-        try {
-            return crawlerService.createTwitter().showStatus(id);
-        } catch (TwitterException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public boolean isTweetSizeEqualUserAllTweetSize(List<Status> list, int size) {
         return list.size() == size ? true : false;
     }

@@ -9,5 +9,4 @@ import java.util.List;
  */
 public interface TweetService {
     public List<Status> getAllTweetsByUser(String user);
-    public Status getStatusById(Long id);
 }
