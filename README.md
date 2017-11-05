@@ -44,7 +44,8 @@ The goal of the project; given **Twitter User** and return this user's friendss'
   
   ### Run With Http Get Request
   
-  Run **MongoDB** and go to [http://localhost:8080/crawler/{twitterUser}](http://localhost:8080/crawler/{twitterUser})
+  Run **MongoDB** and go to http://localhost:8080/crawler/{twitterUser}
+  Example : [http://localhost:8080/crawler/cmylmz](http://localhost:8080/crawler/cmylmz)
 
 Call these commands for running test classes.
 
