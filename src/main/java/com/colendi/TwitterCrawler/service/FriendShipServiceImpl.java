@@ -21,11 +21,7 @@ public class FriendShipServiceImpl implements FriendShipService {
     @Override
     public void saveUserAndMentionUserAndTweetId(Status status, UserMentionEntity[] mentionEntities) {
         for(UserMentionEntity userMentionEntity : mentionEntities){
-            FriendShip friendShip = new FriendShip();
-            friendShip.setMentionFriend(userMentionEntity.getScreenName());
-            friendShip.setTweetId(status.getId());
-            friendShip.setUsername(status.getUser().getScreenName());
-            friendShipRepository.save(friendShip);
+            this.saveFriendShip(status,userMentionEntity);
         }
     }
 
@@ -38,10 +34,19 @@ public class FriendShipServiceImpl implements FriendShipService {
     }
 
     @Override
-    public void saveFriendShip(Status status, UserMentionEntity[] userMentionEntities) {
+    public void saveFriendShipList(Status status, UserMentionEntity[] userMentionEntities) {
         if(isNoRetweetAndHasMentionFriend(status,userMentionEntities)){
             saveUserAndMentionUserAndTweetId(status,userMentionEntities);
         }
+    }
+
+    @Override
+    public FriendShip saveFriendShip(Status status, UserMentionEntity userMentionEntity) {
+        FriendShip friendShip = new FriendShip();
+        friendShip.setMentionFriend(userMentionEntity.getScreenName());
+        friendShip.setTweetId(status.getId());
+        friendShip.setUsername(status.getUser().getScreenName());
+        return friendShipRepository.save(friendShip);
     }
 
     @Override

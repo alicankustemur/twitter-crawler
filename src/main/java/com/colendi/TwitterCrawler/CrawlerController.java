@@ -35,7 +35,7 @@ public class CrawlerController {
         friendShipCrudService.removeAll();
         for (Status status : statuses) {
             UserMentionEntity[] userMentionEntities = status.getUserMentionEntities();
-            friendShipCrudService.saveFriendShip(status,userMentionEntities);
+            friendShipCrudService.saveFriendShipList(status,userMentionEntities);
         }
 
         return friendShipScoringService.calculateAndGetAllScores();

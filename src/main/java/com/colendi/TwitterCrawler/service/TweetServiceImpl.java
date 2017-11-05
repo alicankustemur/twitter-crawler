@@ -35,7 +35,7 @@ public class TweetServiceImpl implements TweetService {
         return tweets;
     }
 
-    public void addTweetsByUserAndPageNumberToList(String user, Integer pageNumber) {
+    private void addTweetsByUserAndPageNumberToList(String user, Integer pageNumber) {
         try {
             List list = crawlerService.getTweetsByUserAndPageNumber(user, pageNumber);
             tweets.addAll(list);
@@ -45,7 +45,7 @@ public class TweetServiceImpl implements TweetService {
 
     }
 
-    public boolean isTweetSizeEqualUserAllTweetSize(List<Status> list, int tweetSize) {
+    private boolean isTweetSizeEqualUserAllTweetSize(List<Status> list, int tweetSize) {
         return list.size() == tweetSize ? true : false;
     }
 

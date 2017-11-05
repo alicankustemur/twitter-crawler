@@ -21,9 +21,6 @@ import java.util.TreeMap;
 public class FriendShipScoringServiceImpl implements FriendShipScoringService {
 
     private final FriendShipRepository friendShipRepository;
-    private MultiKeyMap multiKeyMap;
-    private Integer totalCount;
-    private Map<String,Double> scoresMap;
 
     public FriendShipScoringServiceImpl(FriendShipRepository friendShipRepository) {
         this.friendShipRepository = friendShipRepository;
@@ -32,28 +29,36 @@ public class FriendShipScoringServiceImpl implements FriendShipScoringService {
     @Override
     public Map calculateAndGetAllScores() {
         List<FriendShip> friendShipList = friendShipRepository.findAll();
-        incrementCountSameMentionFriendsAndAddToMap(friendShipList);
-        this.hasNextInMapCalculateScores(multiKeyMap.mapIterator());
+        MultiKeyMap multiKeyMap = new MultiKeyMap();
+        multiKeyMap = incrementCountSameMentionFriendsAndAddToMap(multiKeyMap, friendShipList);
+        Map<String, Double> scoresMap = new HashMap();
+        scoresMap = this.hasNextInMapCalculateScores(scoresMap,multiKeyMap.mapIterator());
+        scoresMap = MapUtil.sortStringAndDoubleMapByValue(scoresMap);
 
-        return MapUtil.sortStringAndDoubleMapByValue(scoresMap);
+        return scoresMap;
     }
 
-    public void hasNextInMapCalculateScores(MapIterator mapIterator){
-        scoresMap = new HashMap();
-        while (mapIterator.hasNext()){
+    @Override
+    public Map hasNextInMapCalculateScores(Map scoresMap,MapIterator mapIterator) {
+        while (mapIterator.hasNext()) {
             mapIterator.next();
-            this.calculatePercentAndPutPercentingValueAndMentionFriendNameToMap(mapIterator);
+            scoresMap = this.calculatePercentAndPutPercentingValueAndMentionFriendNameToMap(scoresMap,mapIterator);
         }
+        return scoresMap;
     }
 
-    private void calculatePercentAndPutPercentingValueAndMentionFriendNameToMap(MapIterator mapIterator){
+    @Override
+    public Map calculatePercentAndPutPercentingValueAndMentionFriendNameToMap(Map scoresMap,MapIterator mapIterator) {
+        Integer totalCount = friendShipRepository.findAll().size();
         MultiKey multiKey = (MultiKey) mapIterator.getKey();
-        Double percent = this.calculatePercent(mapIterator,totalCount);
+        Double percent = this.calculatePercent(mapIterator, totalCount);
         String key = multiKey.getKey(1).toString();
-        scoresMap.put(key,percent);
+        scoresMap.put(key, percent);
+        return scoresMap;
     }
 
-    private Double calculatePercent(MapIterator mapIterator, Integer totalCount){
+    @Override
+    public Double calculatePercent(MapIterator mapIterator, Integer totalCount) {
         Double value = Double.valueOf(mapIterator.getValue().toString());
         Double doubleTotalCount = Double.valueOf(totalCount.toString());
         Double percent = (100d * value) / doubleTotalCount;
@@ -61,21 +66,24 @@ public class FriendShipScoringServiceImpl implements FriendShipScoringService {
         return percent;
     }
 
-    private Double convertDoubleToThreeDigit(Double value){
+    @Override
+    public Double convertDoubleToThreeDigit(Double value) {
         DecimalFormat df = new DecimalFormat("#.##");
         Double convertedValue = Double.parseDouble(df.format(value));
         return convertedValue;
     }
 
-    private void incrementCountSameMentionFriendsAndAddToMap(List<FriendShip> friendShipList){
-        totalCount = friendShipList.size();
-        multiKeyMap = new MultiKeyMap();
+    @Override
+    public MultiKeyMap incrementCountSameMentionFriendsAndAddToMap(MultiKeyMap multiKeyMap, List<FriendShip> friendShipList) {
         for (FriendShip friendShip : friendShipList) {
-            this.isExistIncreaseCountIfisNotExistPutDirectly(friendShip);
+            multiKeyMap = this.isExistIncreaseCountIfisNotExistPutDirectly(multiKeyMap, friendShip);
         }
+
+        return multiKeyMap;
     }
 
-    private void isExistIncreaseCountIfisNotExistPutDirectly(FriendShip friendShip){
+    @Override
+    public MultiKeyMap isExistIncreaseCountIfisNotExistPutDirectly(MultiKeyMap multiKeyMap, FriendShip friendShip) {
         Object value = multiKeyMap.get(friendShip.getUsername(), friendShip.getMentionFriend());
         if (value == null) {
             multiKeyMap.put(friendShip.getUsername(), friendShip.getMentionFriend(), 1);
@@ -83,10 +91,9 @@ public class FriendShipScoringServiceImpl implements FriendShipScoringService {
             int count = (Integer) value + 1;
             multiKeyMap.put(friendShip.getUsername(), friendShip.getMentionFriend(), count);
         }
+
+        return multiKeyMap;
     }
-
-
-
 
 
 }
