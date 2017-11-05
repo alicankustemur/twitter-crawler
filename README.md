@@ -3,9 +3,13 @@
 This is a simple **Spring Boot** and **MongoDB** project.
 The goal of the project; given **Twitter User** and return this user's friendss' friendship scores.
 
+**Note : This Crawler only use user's tweets and mentions." ( Not only retweet.)**
+
+#### Example
+
 ![TwitterCrawler](https://github.com/alicankustemur/TwitterCrawler/blob/master/src/main/resources/TwitterCrawler.png?raw=true "TwitterCrawler")
 
-
+ArifV216 Twitter User is best friendship for cmylmz user.
 
 ## Build
  - Maven
