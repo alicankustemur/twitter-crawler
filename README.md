@@ -3,6 +3,10 @@
 This is a simple **Spring Boot** and **MongoDB** project.
 The goal of the project; given **Twitter User** and return this user's friendss' friendship scores.
 
+![TwitterCrawler](https://github.com/alicankustemur/TwitterCrawler/blob/master/src/main/resources/TwitterCrawler.png?raw=true "TwitterCrawler")
+
+
+
 ## Build
  - Maven
  - JDK 7 or later.
@@ -17,6 +21,10 @@ The goal of the project; given **Twitter User** and return this user's friendss'
 ## Requirements
 
  ### Run
+ ```sh
+   java -jar TwitterCrawler.jar
+   ```
+   
   These ones must be installed on your os for run.
   - Maven 
   - MongoDB 
