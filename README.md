@@ -9,17 +9,17 @@ The goal of the project; given **Twitter User** and return this user's friendss'
 
 ![TwitterCrawler](https://github.com/alicankustemur/TwitterCrawler/blob/master/src/main/resources/TwitterCrawler.png?raw=true "TwitterCrawler")
 
-ArifV216 Twitter User is best friendship for cmylmz user.
+**ArifV216** Twitter User is best friendship for **cmylmz** user.
 
 ## Build
- - Maven
- - JDK 7 or later.
+ - **Maven**
+ - **JDK 7** or later.
 
 ## Dependencies
-- Spring Boot Starter MongoDB for MongoDB auto configuration.
-- Twitter4J for Twitter API
-- Apache Commons Collections 4.1 for Map Operations
-- Project Lombok for Domain Model create getter, setter, constructor.
+- **Spring Boot Starter MongoDB** for **MongoDB** auto configuration.
+- **Twitter4J** for **Twitter API**
+- **Apache Commons Collections 4.1** for Map Operations
+- **Project Lombok** for Domain Model create getter, setter, constructor.
 
 
 ## Requirements
@@ -30,9 +30,9 @@ ArifV216 Twitter User is best friendship for cmylmz user.
    ```
    
   These ones must be installed on your os for run.
-  - Maven 
-  - MongoDB 
-  - JRE 7 or later.
+  - **Maven** 
+  - **MongoDB**
+  - **JRE 7** or later.
   
   
  ## Installation
