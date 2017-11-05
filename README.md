@@ -42,7 +42,7 @@ The goal of the project; given **Twitter User** and return this user's friendss'
   mvn clean install
   ```
   
-  ### Run
+  ### Run With Http Get Request
   
   Run **MongoDB** and go to [http://localhost:8080/crawler/{twitterUser}](http://localhost:8080/crawler/{twitterUser})
 
