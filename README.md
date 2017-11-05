@@ -31,7 +31,10 @@ The goal of the project; given **Twitter User** and return this user's friendss'
    
   These ones must be installed on your os for run.
   - **Maven** 
-  - **MongoDB**
+  - **MongoDB** 
+  ( optional Docker environment : 
+   ```docker run -d -p 27017:27017 -p 28017:28017 -e MONGODB_PASS="toor" tutum/mongodb```
+  )
   - **JRE 7** or later.
   
   
