@@ -1,12 +1,8 @@
 package com.colendi.TwitterCrawler.controller;
 
-import com.colendi.TwitterCrawler.CrawlerController;
-import com.colendi.TwitterCrawler.service.FriendShipCrudService;
-import com.colendi.TwitterCrawler.service.FriendShipScoringService;
-import com.colendi.TwitterCrawler.service.TweetService;
+import com.colendi.TwitterCrawler.service.CrawlTweetsAndScoringService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -29,13 +25,7 @@ public class CrawlerControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private TweetService tweetService;
-
-    @MockBean
-    private FriendShipCrudService friendShipCrudService;
-
-    @MockBean
-    FriendShipScoringService friendShipScoringService;
+    CrawlTweetsAndScoringService crawlTweetsAndScoringService;
 
     @Test
     public void givenCrawlerControllerWhenTwitterUsernameThenScoringAccountsFriends() throws Exception {
@@ -44,7 +34,7 @@ public class CrawlerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(handler().handlerType(CrawlerController.class))
-                .andExpect(handler().methodName("saveFriendShipAndGetAllFriendShipScore"));;
+                .andExpect(handler().methodName("getTwitterCrawler"));;
 
     }
 
